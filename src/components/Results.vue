@@ -18,7 +18,7 @@ import {mapGetters} from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["concepts", "imageUrl"])
+    ...mapGetters(["concepts", "imageUrl", "cloudinaryBaseUrl"])
   }
 }
 

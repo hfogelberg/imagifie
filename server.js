@@ -16,6 +16,7 @@ app.get("/api/appsettings", (req, res) => {
     cloudinaryBaseUrl: process.env.CLOUDINARY_BASE_URL,
     cloudinaryUploadUrl: process.env.CLOUDINARY_UPLOAD_URL,
     cloudinaryPreset: process.env.CLOUDINARY_PRESET,
+    cloudinaryThumbUrl: process.env.CLOUDINARY_THUMB_URL,
     clarifaiKey: process.env.CLARIFAI_KEY
   }
 

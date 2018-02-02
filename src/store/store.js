@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
   state: {
     cloudinaryPreset: '',
     cloudinaryBaseUrl: '',
+    cloudinaryThumbUrl: '',
     cloudinaryUploadUrl: '',
     clarifaiKey: '',
     isSearching: false,
@@ -23,6 +24,9 @@ export const store = new Vuex.Store({
     },
     cloudinaryBaseUrl: state => {
       return state.cloudinaryBaseUrl;
+    },
+    cloudinaryThumbUrl: state => {
+      return state.cloudinaryThumbUrl;
     },
     cloudinaryUploadUrl: state => {
       return state.cloudinaryUploadUrl;
@@ -47,6 +51,9 @@ export const store = new Vuex.Store({
     },
     cloudinaryBaseUrl: (state, payload) => {
       state.cloudinaryBaseUrl = payload;
+    },
+    cloudinaryThumbUrl: (state, payload) => {
+      state.cloudinaryThumbUrl = payload;
     },
     cloudinaryUploadUrl: (state, payload) => {
       state.cloudinaryUploadUrl = payload;
@@ -88,6 +95,7 @@ export const store = new Vuex.Store({
               console.log(res.data);
               commit("cloudinaryPreset", res.data.settings.cloudinaryPreset);
               commit("cloudinaryBaseUrl", res.data.settings.cloudinaryBaseUrl);
+             commit("cloudinaryThumbUrl", res.data.settings.cloudinaryThumbUrl);
               commit("cloudinaryUploadUrl", res.data.settings.cloudinaryUploadUrl);
               commit("clarifaiKey", res.data.settings.clarifaiKey);
            })
