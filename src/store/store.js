@@ -38,7 +38,7 @@ export const store = new Vuex.Store({
       return state.isSearching;
     },
     concepts: state => {
-      return state.concepts;
+      return state.concepts.slice(0, 10);
     },
     imageUrl: state => {
       return state.imageUrl;
@@ -75,13 +75,15 @@ export const store = new Vuex.Store({
   actions: {
     analyzeImage: ({commit, state}, image )=> {
       const ident = new Clarifai.App({ apiKey: state.clarifaiKey });
-      const url = `${state.cloudinaryBaseUrl}/${image}`;
-      commit("imageUrl", url);
+      const url = `${state.cloudinaryThumbUrl}/${image}`;
+      commit("imageUrl", `${state.cloudinaryBaseUrl}/${image}`)
+      console.log("Analyzing image", url);
 
       ident.models.predict(Clarifai.GENERAL_MODEL, url).then(
         function(response) {
-          const data = response.outputs[0].data;
-          commit("concepts", data);
+          const concepts = response.outputs[0].data;
+          console.log("Concepts", concepts);
+          commit("concepts", concepts);
         },
         function(err) {
           console.error("Clarifai error", err);

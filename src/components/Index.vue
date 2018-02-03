@@ -1,7 +1,7 @@
 <template>
   <div class="create">
     <header>
-      <h1 class="primary-header">Upload Image</h1>
+      <h2 class="secondary-header">Upload Image</h2>
 
       <p class="paragraph">
         This application is an example of using <a href="https://clarifai.com">Clarifai</a>'s
@@ -42,6 +42,7 @@ export default {
       fd.append("file", e.target.files[0]);
 
       const url = this.cloudinaryUploadUrl;
+      console.log("Upload URL", url);
       const config = {
         headers: { 
           "Content-Type": "application/x-www-form-urlencoded"
@@ -55,7 +56,7 @@ export default {
           this.$router.push("/results");
         })
         .catch(err => {
-          console.log("Upload error", err);
+          console.log("Error uploading image to Cloudianry", err);
           return false;
         });
     }
@@ -67,6 +68,7 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/main.scss";
 .create {
+  margin-top: 8rem;
   position: relative;
 }
 

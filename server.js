@@ -20,6 +20,8 @@ app.get("/api/appsettings", (req, res) => {
     clarifaiKey: process.env.CLARIFAI_KEY
   }
 
+  console.log("Returning app settings", settings);
+
   res.setHeader("Content-Type", "application/json");
   res.send(JSON.stringify({ settings }));
 });
