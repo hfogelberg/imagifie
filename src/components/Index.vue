@@ -1,17 +1,15 @@
 <template>
   <div class="create">
-    <header>
-      <h2 class="secondary-header">Upload Image</h2>
+    <h2 class="secondary-header">Upload Image</h2>
 
-      <p class="paragraph">
-        This application is an example of using <a href="https://clarifai.com">Clarifai</a>'s
-        image recognition API.<br>
-        The file must be less than 195 Kb in size. Otherwise analyzes will fail!
-      </p>
-    </header>
+    <p class="paragraph">
+      This application is an example of using <a href="https://clarifai.com">Clarifai's</a> image recognition API.
+      <br />
+      <br />
+      Upload an image (or take a photo on a mobile) and the app will till you what is in the picture.
+    </p>
     
     <form enctype="multipart/form-data" class="form">
-
       <input type="file" name="image" id="file" class="inputfile" @change="uploadImage" />
       <label for="file">Choose a file</label>
     </form>
@@ -68,37 +66,42 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/main.scss";
 .create {
-  margin-top: 8rem;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
+  @media only screen and (min-width: 321px) and (max-width: 599px) {
+    margin-top: 4rem;
+  }
+  @media only screen and (min-width: 600px) {
+    margin-top: 10rem;
+  }
 }
 
-header {
-  width: 60vw;
-  margin-left: 20vw;
-  margin-bottom: 5rem;
-}
-
-.primary-header {
-  margin-bottom: 5rem;
-}
 .paragraph {
-  background-color: $background-color-dark;
-  max-width: 60ch;
-  display: block;
-  margin: 0 auto;
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin-bottom: $gutter-small;
   border-radius: 8px;
-  padding: 3rem;
+  background-color: $background-color-dark;
   box-shadow: 0 0 .7rem .7rem rgba($color-black, .4);
+
+  @media only screen and (min-width: 321px) and (max-width: 599px) {
+    width: 70vw;
+    padding: 1rem;
+    margin-bottom: 4rem;
+  }
+    @media only screen and (min-width: 600px) {
+      margin-top: 10rem;
+      margin-bottom: 10rem;
+      max-width: 60ch;
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: $gutter-small;
+      border-radius: 8px;
+      padding: 3rem;
+    }
 }
 
 .form {
-  position: absolute;
-  margin: 0 auto;
   margin-top: 2rem;
-  width: 10%;
-  margin-left: 40%;
 }
 </style>

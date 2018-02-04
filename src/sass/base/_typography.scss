@@ -20,13 +20,14 @@
         font-size: 2.6rem;
     }
     @media only screen and (min-width: 321px) and (max-width: 599px) {
-        font-size: 3rem;
-        margin-bottom: $gutter-xsmall;
+        font-size: 4rem;
+        padding: 2rem 0 1rem 0;
+        width: 100%;
     }
     @media only screen and  (min-width: 600px) {
-        font-size: 5rem;
-        font-weight: 400;
-        margin-bottom: 5rem;
+        font-size: 8rem;
+        font-weight: 700;
+        margin-bottom: 3vh;
         line-height: 5rem;
     }
 }
