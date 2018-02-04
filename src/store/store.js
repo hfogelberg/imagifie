@@ -69,10 +69,17 @@ export const store = new Vuex.Store({
     },
     imageUrl: (state, payload) => {
       state.imageUrl = payload;
+    },
+    isSearching: (state, payload) => {
+      state.isSearching = payload;
     }
   },
 
   actions: {
+    setIsSearching: ({commit}, isSearching) => {
+      commit("isSearching", isSearching);
+    },
+
     analyzeImage: ({commit, state}, image )=> {
       const ident = new Clarifai.App({ apiKey: state.clarifaiKey });
       const url = `${state.cloudinaryThumbUrl}/${image}`;
@@ -84,6 +91,7 @@ export const store = new Vuex.Store({
           const concepts = response.outputs[0].data;
           console.log("Concepts", concepts);
           commit("concepts", concepts);
+          commit("isSearching", false);
         },
         function(err) {
           console.error("Clarifai error", err);

@@ -2,7 +2,12 @@
   <div class="result">
     <h2 class="secondary-header">Result</h2>
 
-    <div class="result-props">
+
+    <div class="searching" v-show="isSearching">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="result-props" v-show="!isSearching">
       <div class="row">
         <div class="col">
           <ul class="list">
@@ -25,7 +30,7 @@ import {mapGetters} from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["concepts", "imageUrl", "cloudinaryBaseUrl"])
+    ...mapGetters(["concepts", "imageUrl", "cloudinaryBaseUrl", "isSearching"])
   }
 }
 
@@ -36,10 +41,15 @@ export default {
 
 .result { 
   height: 200vh; 
+  @media only screen and (max-width: 320px)  {
+    margin-top: 7rem;
+  }
+
   @media only screen and (min-width: 321px) and (max-width: 599px) {
     margin-top: 2rem;
     padding: 2rem;
   }
+  
   @media only screen and (min-width: 600px) {
     margin-top: 10rem;
   }
@@ -81,34 +91,46 @@ export default {
 
 .list {
   background-color: $background-color-dark;
-  padding: 3rem;
   list-style: square;
   text-transform: capitalize;
   border-radius: 8px;
   box-shadow: 0 0 .7rem .7rem rgba($color-black, .4);
   margin-bottom: 3rem;
 
+  @media only screen and (max-width: 320px) {
+    width: 70vw;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 2rem 2rem 2rem 4rem;
+  }
+
   @media only screen and (min-width: 321px) and (max-width: 599px) {
     width: 70vw;
     font-size: 2.5rem;
     font-weight: 400;
+    padding: 3rem;
   }
 
-  @media-only (min-width: 600px) {
-    font-size: 4.5rem;
+  @media only screen and (min-width: 600px) {
+    font-size: 2rem;
+    padding: 2rem 15rem 2rem 4rem;
     font-weight: 400;
-    width: 60%;
   }
 }
 
 .image {
-  max-width: 80%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 0 .7rem .7rem rgba($color-black, .4);
 
+  @media only screen and (max-width: 320px) {
+    width: 90vw;
+  }
    @media only screen and (min-width: 321px) and (max-width: 599px) {
     width: 70vw;
+  }
+  @media only screen and (min-width: 600px) {
+    max-width: 80%;
   }
 }
 

@@ -50,6 +50,7 @@ export default {
         .post(url, fd, config)
         .then(res => {
           let image = `${res.data.public_id}.${res.data.format}`;
+          this.$store.dispatch("setIsSearching", true);
           this.$store.dispatch("analyzeImage", image);
           this.$router.push("/results");
         })
@@ -71,6 +72,10 @@ export default {
   justify-content: space-around;
   align-items: center;
   
+  @media only screen and (max-width: 320px) {
+    margin-top: 7rem;
+  }
+
   @media only screen and (min-width: 321px) and (max-width: 599px) {
     margin-top: 4rem;
   }
@@ -84,14 +89,19 @@ export default {
   background-color: $background-color-dark;
   box-shadow: 0 0 .7rem .7rem rgba($color-black, .4);
 
+  @media only screen and (max-width: 320px) {
+    width: 70vw;
+    padding: 1rem;
+    margin-top: 4rem;
+  }
+
   @media only screen and (min-width: 321px) and (max-width: 599px) {
     width: 70vw;
     padding: 1rem;
-    margin-bottom: 4rem;
+    margin-top: 4rem;
   }
     @media only screen and (min-width: 600px) {
-      margin-top: 10rem;
-      margin-bottom: 10rem;
+      margin-top: 8rem;
       max-width: 60ch;
       font-size: 2.2rem;
       font-weight: 400;
@@ -102,6 +112,6 @@ export default {
 }
 
 .form {
-  margin-top: 2rem;
+  margin-top: 8rem;
 }
 </style>
