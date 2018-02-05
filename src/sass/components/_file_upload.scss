@@ -27,7 +27,7 @@
 
 .inputfile:focus+label,
 .inputfile+label:hover {
-  color: $dark-text-color;
+  color: $primary-color;
   background-color: $light-green-color;
   box-shadow: 0 .5rem 2rem rgba($color-black, .6);
 }

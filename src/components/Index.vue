@@ -1,12 +1,8 @@
 <template>
   <div class="create">
-    <h2 class="secondary-header">Upload Image</h2>
-
     <p class="paragraph">
-      This application is an example of using <a href="https://clarifai.com">Clarifai's</a> image recognition API.
-      <br />
-      <br />
-      Upload an image (or take a photo on a mobile) and the app will till you what is in the picture.
+      Upload an image (or take a photo on a mobile) <br />
+      and the app will till you what is in the picture.
     </p>
     
     <form enctype="multipart/form-data" class="form">
@@ -50,14 +46,15 @@ export default {
         .post(url, fd, config)
         .then(res => {
           let image = `${res.data.public_id}.${res.data.format}`;
-          this.$store.dispatch("setIsSearching", true);
           this.$store.dispatch("analyzeImage", image);
-          this.$router.push("/results");
         })
         .catch(err => {
           console.log("Error uploading image to Cloudianry", err);
           return false;
         });
+      
+      this.$store.dispatch("setIsSearching", true);
+      this.$router.push("/results");
     }
   }
 }
@@ -103,7 +100,7 @@ export default {
     @media only screen and (min-width: 600px) {
       margin-top: 8rem;
       max-width: 60ch;
-      font-size: 2.2rem;
+      font-size: 3rem;
       font-weight: 400;
       margin-bottom: $gutter-small;
       border-radius: 8px;

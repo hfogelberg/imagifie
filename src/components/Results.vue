@@ -15,22 +15,64 @@
             {{concept.name}}
             </li>
           </ul>
+  
         </div>
         <div class="col">
           <img :src="imageUrl" class="image"/>
+          <form enctype="multipart/form-data" class="form">
+            <input type="file" name="image" id="file" class="inputfile" @change="uploadImage" />
+            <label for="file">Choose a file</label>
+          </form>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
-
 import {mapGetters} from "vuex";
+import axios from "axios";
 
 export default {
+  data() {
+    return {
+      file: {}
+    }
+  },
+
   computed: {
     ...mapGetters(["concepts", "imageUrl", "cloudinaryBaseUrl", "isSearching"])
+  },
+
+  methods: {
+    uploadImage(e) {
+      console.log("Upload");
+      const fd = new FormData();
+      fd.append("upload_preset", this.cloudinaryPreset);
+      fd.append("file", e.target.files[0]);
+
+      const url = this.cloudinaryUploadUrl;
+      console.log("Upload URL", url);
+      const config = {
+        headers: { 
+          "Content-Type": "application/x-www-form-urlencoded"
+         }
+      };
+      axios
+        .post(url, fd, config)
+        .then(res => {
+          let image = `${res.data.public_id}.${res.data.format}`;
+          this.$store.dispatch("analyzeImage", image);
+        })
+        .catch(err => {
+          console.log("Error uploading image to Cloudianry", err);
+          return false;
+        });
+      
+      this.$store.dispatch("setIsSearching", true);
+      this.$router.push("/results");
+    }
   }
 }
 
@@ -56,7 +98,6 @@ export default {
 }
 
 .result-props {
-
   @media only screen and (min-width: 600px) {
     margin-top: 8rem;
   }
@@ -69,7 +110,7 @@ export default {
   flex-flow: row wrap;
   justify-content: center;
   align-items: flex-start;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   &:last-child {
     margin-bottom: 0;
   }
@@ -84,6 +125,7 @@ export default {
     height: auto;
     width: 45%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -123,16 +165,21 @@ export default {
   border-radius: 8px;
   box-shadow: 0 0 .7rem .7rem rgba($color-black, .4);
 
-  @media only screen and (max-width: 320px) {
-    width: 90vw;
+  @media only screen and (max-width: 599px) {
+    display: none;
   }
-   @media only screen and (min-width: 321px) and (max-width: 599px) {
-    width: 70vw;
-  }
+
   @media only screen and (min-width: 600px) {
-    max-width: 80%;
+    max-width: 70%;
+    margin-bottom: 4rem;
   }
 }
 
+.form {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 </style>
